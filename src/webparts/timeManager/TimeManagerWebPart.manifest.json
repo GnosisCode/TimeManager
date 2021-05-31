@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "2afb19f4-7c12-4065-b323-7dfe94c5090b",
+  "alias": "TimeManagerWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
+    "group": { "default": "Other" },
+    "title": { "default": "TimeManager" },
+    "description": { "default": "The employees should be able to access the application and begin adding their activity and submit. A person shouldn’t be able to capture more than 8 hours a day. Anything more than 8 hours is flagged as overtime and requires manager approval. An implementation of the Approval Workflow is not required." },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "TimeManager"
+    }
+  }]
+}

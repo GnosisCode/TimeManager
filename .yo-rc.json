@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "onprem19",
+    "version": "1.11.0",
+    "libraryName": "time-management",
+    "libraryId": "0c2909d4-65f9-41fc-bfbc-2c69f27be4f4",
+    "packageManager": "npm",
+    "componentType": "webpart"
+  }
+}
