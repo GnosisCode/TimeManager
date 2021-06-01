@@ -8,7 +8,7 @@ An implementation of the Approval Workflow is not required.
 When a user arrives on the application, the previous entries for the day should be shown.
 A greeting to the current logged in user should be shown with their Display Name in the message.
 
-
+This package will create a SharePoint list upon activation (Time Manamement List) with the necessary fields and contenttype.
 ## Used SharePoint Framework Version
 
 ![version](https://img.shields.io/badge/version-1.11-green.svg)
@@ -28,14 +28,14 @@ A greeting to the current logged in user should be shown with their Display Name
 
 Solution|Author(s)
 --------|---------
-folder name | Author details (name, company, twitter alias with link)
+folder name | Author details (Thulani Mavimbela, PhumelaniGroup, @majestix47)
 
 ## Version history
 
 Version|Date|Comments
 -------|----|--------
-1.1|March 10, 2021|Update comment
-1.0|January 29, 2021|Initial release
+1.1|May 31, 2021|Initial Commit
+1.0|June 01, 2021| Component Creation
 
 ## Disclaimer
 
@@ -49,6 +49,7 @@ Version|Date|Comments
 - Ensure that you are at the solution folder
 - in the command-line run:
   - **npm install**
+  - **check if the required list was created**
   - **gulp serve**
 
 > Include any additional steps as needed.
@@ -59,9 +60,15 @@ Description of the extension that expands upon high-level summary above.
 
 This extension illustrates the following concepts:
 
-- topic 1
-- topic 2
-- topic 3
+- Building an SPFx WebPart
+- Creating React Components
+- Fetching List Data From SharePoint
+- Saving to SharePoint
+
+## TODO
+
+- Add C# Project to save items on DataBase and Send Approval Emails
+- Add Logic to Check time exceeding 8 hours
 
 > Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
 

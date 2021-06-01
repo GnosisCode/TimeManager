@@ -32,6 +32,8 @@ export default class TimeManager extends React.Component<
 > {
   constructor(props: ITimeManagerProps) {
     super(props);
+    this._onTimeAdd = this._onTimeAdd.bind(this);
+
     this.state = {
       timeSheetItems: null,
       numberofEntries: 0,
@@ -42,7 +44,40 @@ export default class TimeManager extends React.Component<
     };
   }
 
-  public componentDidMount(): void {
+  private _onTimeAdd(newTime: TimeSheetItem) {
+    this.setState(
+      (
+        prevState: ITimeManagerState,
+        props: ITimeManagerProps
+      ): ITimeManagerState => {
+        prevState.loading = true;
+        return prevState;
+      }
+    );
+    if (newTime.TotalHours != null && newTime.TotalHours > 0) {
+      this.props.listProvider.addMyTimeSheetSPList(newTime).then((success) => {
+        debugger;
+        if (success) {
+          this._fetchData();
+        } else {
+          this.setState({ error: "Something Went Wrong" });
+        }
+      });
+    } else {
+      //CANCEL
+      this.setState(
+        (
+          prevState: ITimeManagerState,
+          props: ITimeManagerProps
+        ): ITimeManagerState => {
+          prevState.loading = false;
+          return prevState;
+        }
+      );
+    }
+  }
+
+  private _fetchData(): void {
     this.props.listProvider
       .fetchMyTimeSheetSPList()
       .then((items: TimeSheetItem[]) => {
@@ -54,11 +89,22 @@ export default class TimeManager extends React.Component<
           ): ITimeManagerState => {
             prevState.timeSheetItems = items;
             prevState.loading = false;
-            prevState.numberofEntries = items.length;
+            if (items.length > 0) {
+              prevState.numberofEntries = items.length;
+              prevState.totalDayHours = Number(
+                items
+                  .map((e) => e.TotalHours)
+                  .reduce((x: number, y: number) => x + y)
+              );
+            }
             return prevState;
           }
         );
       });
+  }
+
+  public componentDidMount(): void {
+    this._fetchData();
   }
 
   public render(): React.ReactElement<ITimeManagerProps> {
@@ -74,20 +120,20 @@ export default class TimeManager extends React.Component<
         <Spinner label={"Loading ..."} />
       </div>
     ) : null;
-    const timeSheet: JSX.Element =
-      this.state.numberofEntries > 0 ? (
-        <TimeList timeSheets={this.state.timeSheetItems} />
-      ) : (
-        <div />
-      );
-
+    const timeSheet: JSX.Element = !this.state.loading ? (
+      <TimeList
+        timeSheets={this.state.timeSheetItems}
+        onTimeAdd={this._onTimeAdd}
+        TotalHours={this.state.totalDayHours}
+      />
+    ) : null;
     return (
       <div className={styles.timeManager}>
         <div className={styles.container}>
           <div className={styles.row}>
             <div>
               <Toolbar
-                message={"Welcome, "}
+                message={"Welcome"}
                 displayName={this.props.currentUser.toString()}
                 userEmail={this.props.userEmail}
               />

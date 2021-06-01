@@ -1,12 +1,15 @@
 import { TimeSheetItem } from "../../../../models/TimeSheetItem";
 
-interface ITimeTextProps {
+interface ITimeFormState {
   Title: String;
   TotalHours: Number;
+  AllDayHours: Number;
   Status: String;
   Category: String;
   Description: String;
-  onTimeAdd: (newTime: TimeSheetItem) => void;
+  Error: boolean;
+  Loading: boolean;
+  NeedsApproval: boolean;
 }
 
-export default ITimeTextProps;
+export default ITimeFormState;

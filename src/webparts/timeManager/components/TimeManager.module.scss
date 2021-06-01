@@ -10,7 +10,7 @@
   .row {
     @include ms-Grid-row;
     @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
+    background-color: #ffff;
     padding: 20px;
   }
 
@@ -37,6 +37,10 @@
     @include ms-fontColor-white;
   }
 
+  .buttonDisabled {
+    background-color: gray;
+  }
+
   .button {
     // Our button
     text-decoration: none;
@@ -47,7 +51,7 @@
     background-color: $ms-color-themePrimary;
     border-color: $ms-color-themePrimary;
     color: $ms-color-white;
-
+    margin: 10px;
     // Basic Button
     outline: transparent;
     position: relative;
@@ -73,3 +77,39 @@
     }
   }
 }
+
+.formHeading {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgb(152, 111, 11);
+}
+
+.formTitle {
+  color: #000;
+}
+
+.formDesc {
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0px 0px 20px;
+  padding-top: 8px;
+  color: rgb(50, 49, 48);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.formLabel {
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(50, 49, 48);
+  box-sizing: border-box;
+  box-shadow: none;
+  margin: 0px;
+  display: block;
+  padding: 5px 0px;
+  overflow-wrap: break-word;
+}
+ 

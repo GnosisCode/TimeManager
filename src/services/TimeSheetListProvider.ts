@@ -8,7 +8,7 @@ const LOG_SOURCE: string = "TimeSheetManager_WebPart";
 export class TimeSheetListProvider implements ITimeSheetListProvider {
   private readonly _webAbsoluteUrl: string;
   private readonly _spTimeSheetList: string;
-  private readonly _spUserID: string;
+  private readonly _spUserID: string; 
 
   constructor(
     webAbsoluteUrl: string,
@@ -76,6 +76,31 @@ export class TimeSheetListProvider implements ITimeSheetListProvider {
             new Error(`${this._spTimeSheetList} List does not exits.`)
           );
           reject(error);
+        });
+    });
+  }
+
+  addMyTimeSheetSPList(newItem: TimeSheetItem): Promise<Boolean> {
+    return new Promise<Boolean>((resolve, reject) => {
+      debugger;
+      let spSite = new Web(this._webAbsoluteUrl);
+      return spSite.lists
+        .getByTitle(this._spTimeSheetList)
+        .items.add({
+          Title: newItem.Title,
+          TimeManagementDescription: newItem.Description,
+          TimeManagementCategory: newItem.Category,         
+          Hours: newItem.TotalHours
+        })
+        .then(async (data: any) => {
+          resolve(true);
+        })
+        .catch((error) => {
+          Log.error(
+            LOG_SOURCE,
+            new Error(`${this._spTimeSheetList} Could not create entry.`)
+          );
+          reject(false);
         });
     });
   }

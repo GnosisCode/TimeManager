@@ -5,8 +5,7 @@ import {
   FocusZoneDirection,
   css,
 } from "office-ui-fabric-react";
-import { Checkbox } from "office-ui-fabric-react/lib/Checkbox";
-import { Label } from "office-ui-fabric-react/lib/Label";
+
 import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
 
 export interface IToolbarProps {
@@ -24,7 +23,7 @@ export default class Toolbar extends React.Component<IToolbarProps, {}> {
     return (
       <div role="row" data-is-focusable={false}>
         <div
-          style={{ width: "100%", margin: "4px" }}
+          style={{ width: "100%", margin: "4px", color: "#000" }}
           className={css("ms-Grid-row")}
         >
           <Persona

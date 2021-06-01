@@ -4,6 +4,7 @@ import {
   FocusZone,
   FocusZoneDirection,
   css,
+  IconButton,
 } from "office-ui-fabric-react";
 import { Checkbox } from "office-ui-fabric-react/lib/Checkbox";
 import { Label } from "office-ui-fabric-react/lib/Label";
@@ -20,17 +21,39 @@ export default class TimeItem extends React.Component<ITimeItemProps, {}> {
   }
 
   public render(): JSX.Element {
-    const classTimeSheetItem: string = css("ms-Grid", "ms-u-slideDownIn20");
-
     return (
-      <div role="row" className={classTimeSheetItem} data-is-focusable={false}>
-        <div
-          style={{ width: "100%", margin: "4px" }}
-          className={css("ms-Grid-row")}
-        >
+      <div
+        role="row"
+        className={"ms-Grid-col ms-lg12"}
+        style={{ color: "#000" }}
+        data-is-focusable={false}
+      >
+        <div className={"ms-Grid-col ms-lg3"}>
+          {this.props.TimeSheetItem.Title}
+        </div>
+        <div className={"ms-Grid-col ms-lg3"}>
           {this.props.TimeSheetItem.Description}
+        </div>
+        <div className={"ms-Grid-col ms-lg2"}>
+          {this.props.TimeSheetItem.Category}
+        </div>
+        <div className={"ms-Grid-col ms-lg2"}>
+          {this.props.TimeSheetItem.Status}
+        </div>
+        <div className={"ms-Grid-col ms-lg1"}>
+          {this.props.TimeSheetItem.TotalHours}
+        </div>
+        <div className={"ms-Grid-col ms-lg1"}>
+          <IconButton
+            checked={true}
+            iconProps={{ iconName: "Cancel" }}
+            className="close"
+            onClick={() => this.deleteItem()}
+          />
         </div>
       </div>
     );
   }
+
+  deleteItem(): void {}
 }
