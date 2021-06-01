@@ -1,3 +1,9 @@
+import { ITimeSheetListProvider } from "../../../services/ITimeSheetListProvider";
+
 export interface ITimeManagerProps {
-  description: string;
+  userEmail:string;
+  numberofEntries: number;
+  totalDayHours: number;
+  currentUser: String;
+  listProvider: ITimeSheetListProvider;
 }
