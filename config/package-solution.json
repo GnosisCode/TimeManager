@@ -5,7 +5,23 @@
     "id": "0c2909d4-65f9-41fc-bfbc-2c69f27be4f4",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
-    "skipFeatureDeployment": true
+    "skipFeatureDeployment": true,
+    "features": [
+      {
+        "title": "Time Management",
+        "description": "Deploys a custom list used by timemanagement webparts",
+        "id": "c0c381cc-013c-4d5d-b7d2-3722abb1aa22",
+        "version": "1.0.0.0",       
+        "assets": {
+          "elementManifests": [
+            "elements.xml"
+          ],
+          "elementFiles":[
+            "listSchema.xml"
+          ]
+        }
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/time-management.sppkg"

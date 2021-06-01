@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+<Field      ID="{631d0d3a-3fdf-4c47-9db1-e2444473001b}"
+            Name="TimeManagementDescription"
+            DisplayName="Description"
+            Type="Note"           
+            RichText="TRUE"             
+            Required="FALSE"            
+            Group="Time Management Columns" />
+<Field      ID="{811c7b03-fd85-4517-aa65-51b999c967c2}"
+            Name="TimeManagementCategory"
+            DisplayName="Category"
+            Type="Choice"
+            Required="TRUE"
+            Group="Time Management Columns">
+        <CHOICES>
+        <CHOICE>Billable</CHOICE>
+        <CHOICE>Non-Billable</CHOICE>
+        <CHOICE>Upskilling</CHOICE>
+        <CHOICE>Meeting</CHOICE>        
+        </CHOICES>
+</Field>
+<Field      ID="{e5e59ff9-8d75-4954-ab62-fc15b9d4a6ed}"
+            Name="TimeManagementHours"
+            DisplayName="Hours"
+            Type="Currency"
+            Decimals="2"
+            Min="0"           
+            Group="Time Management Columns" />
+<Field      ID="{bf54cfb3-b24e-4921-a5e3-05fb662bbe49}"
+            Name="TimeManagementStatus"
+            DisplayName="Status"
+            Type="Choice"
+            Required="TRUE"
+            Group="Time Management Columns">
+        <CHOICES>
+        <CHOICE>Approved</CHOICE>
+        <CHOICE>Pending</CHOICE>       
+        </CHOICES>
+</Field>
+<ContentType ID="0x0100CEADAD40C6630B489BDF172555628DA0"               
+                 Name="Time Management Item"
+                 Group="Time Management Content Types"
+                 Description=""
+                 Inherits="FALSE"
+                 Version="0"
+                 Hidden="FALSE"
+                 Sealed="TRUE"
+                 >
+<FieldRefs>
+            <FieldRef ID="{631d0d3a-3fdf-4c47-9db1-e2444473001b}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"  />
+            <FieldRef ID="{811c7b03-fd85-4517-aa65-51b999c967c2}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{e5e59ff9-8d75-4954-ab62-fc15b9d4a6ed}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"  />
+            <FieldRef ID="{bf54cfb3-b24e-4921-a5e3-05fb662bbe49}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+</FieldRefs>
+</ContentType> 
+    <!-- Time Management List (TemplateType 100) -->
+<ListInstance 
+            CustomSchema="listSchema.xml"
+            FeatureId="00bfea71-de22-43b2-a848-c05709900100"
+            Title="Time Management List" 
+            Description=""
+            TemplateType="100"
+            Url="Lists/TimeManagement"
+            Hidden="FALSE"
+            RootWebOnly="FALSE">          
+            
+    </ListInstance>
+</Elements>

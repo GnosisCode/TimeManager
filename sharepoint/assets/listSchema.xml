@@ -1,0 +1,68 @@
+<List xmlns:ows="Microsoft SharePoint" 
+      Title="List Schema"
+      Name="ListSchema"
+      Direction="$Resources:Direction;"
+      Url="Lists/ListSchema"
+      BaseType="0"
+      EnableContentTypes="TRUE"
+      FolderCreation="FALSE"
+      VersioningEnabled="TRUE"
+      MajorVersionLimit="100" 
+      EnableMinorVersions="FALSE"
+      MajorWithMinorVersionsLimit="0"
+      DisableAttachments="FALSE"
+      xmlns="http://schemas.microsoft.com/sharepoint/"
+      RootWebOnly="FALSE">
+  <MetaData>
+    <ContentTypes>       
+        <ContentType ID="0x0100CEADAD40C6630B489BDF172555628DA0"
+                    Name="Time Management Item"
+                    Group="Time Management Content Types"
+                    Description=""
+                    >
+            <FieldRefs>             
+            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{631d0d3a-3fdf-4c47-9db1-e2444473001b}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{811c7b03-fd85-4517-aa65-51b999c967c2}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{e5e59ff9-8d75-4954-ab62-fc15b9d4a6ed}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"  />
+            <FieldRef ID="{bf54cfb3-b24e-4921-a5e3-05fb662bbe49}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />            
+            </FieldRefs>
+        </ContentType> 
+    </ContentTypes>
+    <Fields></Fields>
+    <Views>
+      <View BaseViewID="1" 
+            Type="HTML"
+            WebPartZoneID="Main"
+            DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;"
+            DefaultView="TRUE"
+            MobileView="TRUE"
+            MobileDefaultView="TRUE"
+            SetupPath="pages\viewpage.aspx"
+            ImageUrl="/_layouts/images/generic.png"
+            Url="AllItems.aspx">
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <Toolbar Type="Standard" />
+        <ViewFields>        
+          <FieldRef Name="TimeManagementCategory" linkToItem="TRUE"></FieldRef>
+          <FieldRef Name="TimeManagementDescription"></FieldRef>   
+          <FieldRef Name="TimeManagementHours"></FieldRef> 
+          <FieldRef Name="TimeManagementStatus"></FieldRef> 
+          <FieldRef Name="LinkTitle"></FieldRef>
+        </ViewFields>
+        <Query>
+          <OrderBy>
+            <FieldRef Name="ID" />
+          </OrderBy>
+        </Query>
+      </View>
+    </Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>
