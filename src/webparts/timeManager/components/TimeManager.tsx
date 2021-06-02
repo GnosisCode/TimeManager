@@ -33,6 +33,7 @@ export default class TimeManager extends React.Component<
   constructor(props: ITimeManagerProps) {
     super(props);
     this._onTimeAdd = this._onTimeAdd.bind(this);
+    this._onTimeDelete = this._onTimeDelete.bind(this);
 
     this.state = {
       timeSheetItems: null,
@@ -54,7 +55,7 @@ export default class TimeManager extends React.Component<
         return prevState;
       }
     );
-    if (newTime.TotalHours != null && newTime.TotalHours > 0) {
+    if (newTime.Category.length > 0 && newTime.TotalHours > 0) {
       this.props.listProvider.addMyTimeSheetSPList(newTime).then((success) => {
         debugger;
         if (success) {
@@ -63,6 +64,41 @@ export default class TimeManager extends React.Component<
           this.setState({ error: "Something Went Wrong" });
         }
       });
+    } else {
+      //CANCEL
+      this.setState(
+        (
+          prevState: ITimeManagerState,
+          props: ITimeManagerProps
+        ): ITimeManagerState => {
+          prevState.loading = false;
+          return prevState;
+        }
+      );
+    }
+  }
+
+  private _onTimeDelete(deleteTime: TimeSheetItem) {
+    this.setState(
+      (
+        prevState: ITimeManagerState,
+        props: ITimeManagerProps
+      ): ITimeManagerState => {
+        prevState.loading = true;
+        return prevState;
+      }
+    );
+    if (deleteTime.TimeSheetID != null) {
+      this.props.listProvider
+        .deleteMyTimeSheetSPList(deleteTime)
+        .then((success) => {
+          debugger;
+          if (success) {
+            this._fetchData();
+          } else {
+            this.setState({ error: "Something Went Wrong" });
+          }
+        });
     } else {
       //CANCEL
       this.setState(
@@ -88,8 +124,10 @@ export default class TimeManager extends React.Component<
             props: ITimeManagerProps
           ): ITimeManagerState => {
             prevState.timeSheetItems = items;
-            prevState.loading = false;
+            prevState.loading = false;        
+            prevState.error = null;
             if (items.length > 0) {
+              debugger;
               prevState.numberofEntries = items.length;
               prevState.totalDayHours = Number(
                 items
@@ -100,6 +138,10 @@ export default class TimeManager extends React.Component<
             return prevState;
           }
         );
+      })
+      .catch((error) => {
+        this.setState({ error: "Something Went Wrong" });
+        this.setState({ loading: false });
       });
   }
 
@@ -124,6 +166,7 @@ export default class TimeManager extends React.Component<
       <TimeList
         timeSheets={this.state.timeSheetItems}
         onTimeAdd={this._onTimeAdd}
+        onTimeDelete={this._onTimeDelete}
         TotalHours={this.state.totalDayHours}
       />
     ) : null;

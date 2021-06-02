@@ -29,6 +29,7 @@ export default class TimeList extends React.Component<ITimeListProps, any> {
       showDialog: false,
     };
     this._onTimeAdd = this._onTimeAdd.bind(this);
+    this._onTimeDelete = this._onTimeDelete.bind(this);
     this._onRenderCell = this._onRenderCell.bind(this);
     this._showForm = this._showForm.bind(this);
   }
@@ -39,9 +40,15 @@ export default class TimeList extends React.Component<ITimeListProps, any> {
     this.props.onTimeAdd(newTime);
   }
 
+  private _onTimeDelete(deleteItem: TimeSheetItem) {
+    debugger;
+    this._showForm(false);
+    this.props.onTimeDelete(deleteItem);
+  }
+
   public render(): JSX.Element {
     const emptylist =
-      (this.props.timeSheets == null || this.props.timeSheets.length <= 0) ? (
+      this.props.timeSheets == null || this.props.timeSheets.length <= 0 ? (
         <MessageBar messageBarType={MessageBarType.info}>
           No Entries for the day
         </MessageBar>
@@ -49,7 +56,7 @@ export default class TimeList extends React.Component<ITimeListProps, any> {
 
     const TimeInputForm = (
       <TimeForm
-        onTimeAdd={this._onTimeAdd}
+        onTimeAdd={this._onTimeAdd}        
         AllDayHours={this.props.TotalHours}
       />
     );
@@ -118,6 +125,6 @@ export default class TimeList extends React.Component<ITimeListProps, any> {
   private _onRenderCell(Time: TimeSheetItem, index: number) {
     index;
 
-    return <TimeItem TimeSheetItem={Time} />;
+    return <TimeItem TimeSheetItem={Time} onTimeDelete={this._onTimeDelete} />;
   }
 }

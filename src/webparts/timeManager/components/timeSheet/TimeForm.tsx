@@ -3,17 +3,16 @@ import {
   PrimaryButton,
   TextField,
   ButtonType,
-  Persona,
-  PersonaSize,
-  Label,
   Dropdown,
   IDropdownOption,
+  MessageBarType,
+  MessageBar,
 } from "office-ui-fabric-react";
 import ITimeFormProps from "./ITimeFormProps";
 import { TimeSheetItem } from "../../../../models/TimeSheetItem";
 import ITimeFormState from "./ITimeFormState";
 import styles from "../TimeManager.module.scss";
-
+let categories = ["Billable", "Non-Billable", "Upskilling", "Meeting"];
 export default class TimeForm extends React.Component<
   ITimeFormProps,
   ITimeFormState
@@ -31,7 +30,7 @@ export default class TimeForm extends React.Component<
       Status: "",
       Title: "",
       TotalHours: 0,
-      AllDayHours: 0,
+      AllDayHours: this.props.AllDayHours,
       Error: false,
       Loading: false,
       NeedsApproval: false,
@@ -48,10 +47,16 @@ export default class TimeForm extends React.Component<
   }
 
   public render(): JSX.Element {
-    let categories = ["Billable", "Non-Billable", "Upskilling", "Meeting"];
+    
+    const messages = this.state.NeedsApproval ? (
+      <MessageBar messageBarType={MessageBarType.error}>
+        {`Your total hours are ${this.state.AllDayHours} and  exceed the standard limit of 8, you can still submit but Approval from Manager will be required!`}
+      </MessageBar>
+    ) : null;
     return (
       <form>
         <div className="ms-Grid-row">
+          {messages}
           <TextField
             placeholder=""
             value={this.state.Title.toString()}
@@ -118,14 +123,29 @@ export default class TimeForm extends React.Component<
   private _setHours(newValue: any): void {
     debugger;
     if (!Number(newValue)) {
+      this.setState({ Error: true });
+      this.setState({ TotalHours: 0 });
+      this.setState({ AllDayHours: this.props.AllDayHours });
+      this.setState({ NeedsApproval: false });
       return;
     } else {
       if (Number(newValue) > 0) {
         this.setState({ Error: false });
         this.setState({ TotalHours: Number(newValue) });
+
+        let total = Number(newValue) + Number(this.props.AllDayHours);
+        this.setState({ AllDayHours: total });
+
+        if (this.state.AllDayHours > 8) {
+          this.setState({ NeedsApproval: true });
+        } else {
+          this.setState({ NeedsApproval: false });
+        }
       } else {
         this.setState({ Error: true });
-        this.setState({ TotalHours: Number(0) });
+        this.setState({ TotalHours: 0 });
+        this.setState({ AllDayHours: this.props.AllDayHours });
+        this.setState({ NeedsApproval: false });
       }
     }
   }
@@ -138,7 +158,7 @@ export default class TimeForm extends React.Component<
       return "";
     } else {
       this.setState({ Error: true });
-      this.setState({ TotalHours: Number(value) });
+      this.setState({ TotalHours: 0 });      
       return "The field requires a value";
     }
   }

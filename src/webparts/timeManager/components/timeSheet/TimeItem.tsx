@@ -10,10 +10,17 @@ import { Checkbox } from "office-ui-fabric-react/lib/Checkbox";
 import { Label } from "office-ui-fabric-react/lib/Label";
 
 import ITimeItemProps from "./ITimeItemProps";
+import { TimeSheetItem } from "../../../../models/TimeSheetItem";
 
 export default class TimeItem extends React.Component<ITimeItemProps, {}> {
   constructor(props: ITimeItemProps) {
     super(props);
+    this._onTimeDelete = this._onTimeDelete.bind(this);
+  }
+
+  private _onTimeDelete(deleteItem: TimeSheetItem) {
+    debugger;
+    this.props.onTimeDelete(deleteItem);
   }
 
   public shouldComponentUpdate(newProps: ITimeItemProps): boolean {
@@ -48,12 +55,10 @@ export default class TimeItem extends React.Component<ITimeItemProps, {}> {
             checked={true}
             iconProps={{ iconName: "Cancel" }}
             className="close"
-            onClick={() => this.deleteItem()}
+            onClick={() => this._onTimeDelete(this.props.TimeSheetItem)}
           />
         </div>
       </div>
     );
   }
-
-  deleteItem(): void {}
 }
