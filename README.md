@@ -17,6 +17,7 @@ This package will create a SharePoint list upon activation (Time Manamement List
 
 - [SharePoint Framework](https://aka.ms/spfx)
 - [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
+- [Microsoft SharePoint 2019](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
 
 > Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
 
@@ -34,8 +35,8 @@ folder name | Author details (Thulani Mavimbela, PhumelaniGroup, @majestix47)
 
 Version|Date|Comments
 -------|----|--------
-1.1|May 31, 2021|Initial Commit
-1.0|June 01, 2021| Component Creation
+1.0|May 31, 2021|Initial Commit
+1.1|June 01, 2021| Component Creation
 
 ## Disclaimer
 
